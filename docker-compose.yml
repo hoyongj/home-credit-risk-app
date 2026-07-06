@@ -1,13 +1,13 @@
 services:
   back:
     build:
-      context: /home/runner/work/home-credit-risk-app/home-credit-risk-app/back
+      context: ./back
     ports:
       - "8000:8000"
 
   front:
     build:
-      context: /home/runner/work/home-credit-risk-app/home-credit-risk-app/front
+      context: ./front
     depends_on:
       - back
     ports:
