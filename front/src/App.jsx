@@ -80,10 +80,13 @@ function App() {
             <input name="AMT_GOODS_PRICE" type="number" step="0.1" value={formData.AMT_GOODS_PRICE} onChange={handleChange} required />
           </label>
 
-          <label>
-            NAME_EDUCATION_TYPE
-            <input name="NAME_EDUCATION_TYPE" type="text" value={formData.NAME_EDUCATION_TYPE} onChange={handleChange} required />
-          </label>
+          <select name="NAME_EDUCATION_TYPE" value={formData.NAME_EDUCATION_TYPE} onChange={handleChange} required>
+            <option value="Academic degree">Academic degree</option>
+            <option value="Higher education">Higher education</option>
+            <option value="Incomplete higher">Incomplete higher</option>
+            <option value="Secondary / secondary special">Secondary / secondary special</option>
+            <option value="Lower secondary">Lower secondary</option>
+          </select>
 
           <label>
             DAYS_LAST_PHONE_CHANGE
