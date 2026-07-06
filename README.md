@@ -2,23 +2,32 @@
 
 Loan approval web app with a React frontend and FastAPI backend.
 
-## Run with Docker
+## 🚀 1. To run everything (Frontend + Backend)
+Make sure you are in the main project folder and type this:
 
-From the repository root, run:
-
-```bash
+```sh
 docker compose up --build
 ```
 
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- Prediction endpoint: `POST /predict` (reachable through frontend at `/api/predict`)
+*(To stop it later, just click on the terminal and press `Ctrl + C`!)*
 
-## Backend model files
+👉 **Enter here:** [http://localhost:3000](http://localhost:3000)
 
-Place these model artifacts in `/back/models/` before predicting:
+---
 
-- `preprocessor.joblib`
-- `scaler.joblib`
-- `decision_threshold.joblib`
-- `dt_model.joblib`
+## 🎨 2. To run the frontend only (You'll use this the most!)
+
+When you just want to edit the design and UI, use these commands:
+
+```sh
+cd front
+npm install # one time installation
+npm run dev
+
+```
+
+Once you run it, you'll see a link like [http://localhost:5173](http://localhost:5173) in the terminal. Just click it or copy-paste it into your browser to see our site!
+
+> **Tip:** The best part is the screen will update automatically every time you save your code. Let me know if you get stuck!
+
+---
