@@ -21,11 +21,10 @@ class PredictionRequest(BaseModel):
 
 @lru_cache(maxsize=1)
 def load_artifacts() -> tuple:
-    preprocessor = joblib.load(f"{MODEL_DIR}/preprocessor.joblib")
-    scaler = joblib.load(f"{MODEL_DIR}/scaler.joblib")
+    full_pipeline = joblib.load(f'{MODEL_DIR}/full_pipeline.joblib')
     decision_threshold = joblib.load(f"{MODEL_DIR}/decision_threshold.joblib")
     dt_model = joblib.load(f"{MODEL_DIR}/dt_model.joblib")
-    return preprocessor, scaler, decision_threshold, dt_model
+    return full_pipeline, decision_threshold, dt_model
 
 
 app = FastAPI(title="Loan Approval API")
@@ -47,14 +46,13 @@ def health() -> dict:
 @app.post("/predict")
 def predict(payload: PredictionRequest) -> dict:
     try:
-        preprocessor, scaler, decision_threshold, dt_model = load_artifacts()
+        full_pipeline, decision_threshold, dt_model = load_artifacts()
     except FileNotFoundError as exc:
         raise HTTPException(status_code=500, detail=f"Model file missing: {exc}") from exc
 
     input_df = pd.DataFrame([payload.model_dump()])
-    transformed = preprocessor.transform(input_df)
-    scaled = scaler.transform(transformed)
-    probability = float(dt_model.predict_proba(scaled)[0][1])
+    processed_data = full_pipeline.transform(input_df)
+    probability = float(dt_model.predict_proba(processed_data)[0][1])
 
     threshold = float(decision_threshold[0]) if hasattr(decision_threshold, "__getitem__") else float(decision_threshold)
     decision = "APPROVE" if probability < threshold else "DENY"
