@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import './App.css'
 
+// In Docker/local dev this stays '/api' and nginx proxies it to the backend
+// container. In production (Cloudflare Pages), set VITE_API_URL at build
+// time to the Render backend's URL, e.g. https://your-api.onrender.com
+const API_BASE = import.meta.env.VITE_API_URL || '/api'
+
 const defaultForm = {
   DAYS_EMPLOYED: -14600,
   YEARS_BIRTH: 65,
@@ -31,7 +36,7 @@ function App() {
     setError('')
 
     try {
-      const response = await fetch('/api/predict', {
+      const response = await fetch(`${API_BASE}/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

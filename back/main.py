@@ -1,3 +1,4 @@
+import os
 from functools import lru_cache
 
 import joblib
@@ -7,6 +8,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 MODEL_DIR = "models"
+
+# Comma-separated list of allowed origins, e.g. "https://your-app.pages.dev".
+# Defaults to "*" for local/Docker dev; set explicitly in production.
+ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "*").split(",")
 
 
 class PredictionRequest(BaseModel):
@@ -31,7 +36,7 @@ app = FastAPI(title="Loan Approval API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
