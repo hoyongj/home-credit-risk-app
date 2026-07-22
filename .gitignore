@@ -1,3 +1,7 @@
+# My Git Ignore
+knn_model.joblib
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
