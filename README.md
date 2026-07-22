@@ -2,7 +2,7 @@
 
 Loan approval web app with a React frontend and FastAPI backend.
 
-## 🚀 1. To run everything (Frontend + Backend)
+## 1. To run everything (Frontend + Backend)
 Make sure you are in the main project folder and type this:
 
 ```sh
@@ -11,11 +11,11 @@ docker compose up --build
 
 *(To stop it later, just click on the terminal and press `Ctrl + C`!)*
 
-👉 **Enter here:** [http://localhost:3000](http://localhost:3000)
+**Enter here:** [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🎨 2. To run the frontend only (You'll use this the most!)
+## 2. To run the frontend only (You'll use this the most!)
 
 When you just want to edit the design and UI, use these commands:
 
@@ -32,7 +32,7 @@ Once you run it, you'll see a link like [http://localhost:5173](http://localhost
 
 ---
 
-## 🌍 3. Deploying to production (Cloudflare Pages + Render)
+## 3. Deploying to production (Cloudflare Pages + Render)
 
 The same code runs locally (Docker) and in production — the only difference is two environment variables. Nothing needs to be forked or rewritten per host.
 
