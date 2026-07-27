@@ -174,7 +174,7 @@ const styles = `
   .lp-gauge-wrap { position: relative; width: 240px; height: 140px; }
   .lp-gauge-svg { width: 240px; height: 140px; overflow: visible; }
   .lp-needle {
-    transform-origin: 120px 130px;
+    transform-origin: 120px 100px;
     transition: transform 1.6s cubic-bezier(0.34, 1.2, 0.64, 1);
   }
   .lp-gauge-score-wrap {
@@ -183,11 +183,13 @@ const styles = `
   }
   .lp-gauge-score {
     font-size: 36px; font-weight: 900; letter-spacing: -2px; color: var(--white);
+    margin-bottom: 30px;
   }
   .lp-gauge-band {
     font-size: 12px; font-weight: 600;
     padding: 3px 10px; border-radius: 20px;
     margin-top: 4px; display: inline-block;
+
   }
   .lp-band-low    { background: rgba(34,197,94,0.15);  color: var(--green); }
   .lp-band-medium { background: rgba(234,179,8,0.15);  color: var(--yellow); }
@@ -356,14 +358,14 @@ function RiskGauge({ score = 32 }) {
 
       <div className="lp-gauge-wrap">
         <svg className="lp-gauge-svg" viewBox="0 0 240 140">
-          <path d={arc(120,130,100,0,180)} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="14" strokeLinecap="round"/>
-          <path d={arc(120,130,100,0,63)}  fill="none" stroke="#22C55E" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
-          <path d={arc(120,130,100,63,117)} fill="none" stroke="#EAB308" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
-          <path d={arc(120,130,100,117,180)} fill="none" stroke="#EF4444" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
+          <path d={arc(120,100,100,0,180)} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="14" strokeLinecap="round"/>
+          <path d={arc(120,100,100,0,63)}  fill="none" stroke="#22C55E" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
+          <path d={arc(120,100,100,63,117)} fill="none" stroke="#EAB308" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
+          <path d={arc(120,100,100,117,180)} fill="none" stroke="#EF4444" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
           <g className="lp-needle" style={{ transform: `rotate(${animated ? needleDeg : -90}deg)` }}>
-            <line x1="120" y1="130" x2="120" y2="38" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-            <circle cx="120" cy="130" r="7" fill="white" opacity="0.9"/>
-            <circle cx="120" cy="130" r="3.5" fill="#6C63FF"/>
+            <line x1="120" y1="100" x2="120" y2="8" stroke="#b1adfc" strokeWidth="2.5" strokeLinecap="round"/>
+            <circle cx="120" cy="100" r="7" fill="#b1adfc" opacity="0.9"/>
+            <circle cx="120" cy="100" r="3.5" fill="#FFFF"/>
           </g>
         </svg>
         <div className="lp-gauge-score-wrap">
