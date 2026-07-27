@@ -13,12 +13,12 @@ const styles = `
   :root {
     --navy:   #F7F8FF;
     --navy2:  #2E3F7F;
-    --accent: #827cf8e2; //#6C63FF
-    --accent2: #9B93FF;
+    --accent: #1d3c89e2; //#6C63FF
+    --accent2: #93b3ff;
     --surf:   #060608; //  #F7F8FF
     --dark:   #0D1424;
     --muted:  #7A8299;
-    --white:  #060608;
+    --black:  #060608;
     --green:  #22C55E;
     --yellow: #EAB308;
     --red:    #EF4444;
@@ -39,7 +39,7 @@ const styles = `
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 18px 60px;
-    background: rgba(107, 99, 255, 0.29);
+    background: rgba(99, 156, 255, 0.29);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
@@ -54,7 +54,7 @@ const styles = `
     animation: lp-pulse 2s ease-in-out infinite;
   }
   @keyframes lp-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(108,99,255,0.6); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(110, 138, 208, 0.6); }
     50%       { box-shadow: 0 0 0 6px rgba(108,99,255,0); }
   }
   .lp-nav-links {
@@ -72,7 +72,7 @@ const styles = `
     border-radius: 8px !important;
     font-weight: 600 !important;
   }
-  .lp-nav-cta:hover { background: #574fff !important; }
+  .lp-nav-cta:hover { background: #628efd !important; }
 
   /* HERO */
   .lp-hero {
@@ -87,7 +87,7 @@ const styles = `
   }
   .lp-blob-1 {
     width: 600px; height: 600px;
-    background: rgba(108,99,255,0.18);
+    background: rgba(77, 120, 184, 0.31);
     top: -100px; right: -100px;
   }
   .lp-blob-2 {
@@ -120,16 +120,16 @@ const styles = `
 
   .lp-btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: var(--white);
+    background: var(--accent); color: "white";
     padding: 16px 32px; border-radius: 10px;
     font-size: 15px; font-weight: 700;
     border: none; cursor: pointer; text-decoration: none;
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 8px 32px rgba(108,99,255,0.35); //rgba(108,99,255,0.35)
+    box-shadow: 0 8px 32px rgba(99, 133, 255, 0.35); //rgba(108,99,255,0.35)
   }
   .lp-btn-primary:hover {
-    background: #574fff; transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(108,99,255,0.5);
+    background: #628efd; transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(99, 148, 255, 0.5);
   }
   .lp-btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
@@ -155,7 +155,7 @@ const styles = `
 
   /* GAUGE CARD */
   .lp-gauge-card {
-    background: rgba(255,255,255,0.04);
+    background: rgba(130, 178, 246, 0.15);
     border: 1px solid rgba(255,255,255,0.09);
     border-radius: 24px; padding: 44px 40px;
     display: flex; flex-direction: column; align-items: center;
@@ -207,13 +207,13 @@ const styles = `
 
   .lp-gauge-btn {
     margin-top: 28px; width: 100%;
-    background: var(--accent); color: var(--white);
+    background: var(--accent); color: "white";
     padding: 14px; border-radius: 10px;
     font-size: 14px; font-weight: 700;
     border: none; cursor: pointer; text-align: center;
     transition: background 0.2s, transform 0.15s; text-decoration: none; display: block;
   }
-  .lp-gauge-btn:hover { background: #574fff; transform: translateY(-1px); }
+  .lp-gauge-btn:hover { background: #4f87ff; transform: translateY(-1px); }
 
   /* HOW IT WORKS */
   .lp-how-bg { background: rgb(255, 255, 255); }
@@ -237,10 +237,10 @@ const styles = `
     border-radius: 18px; padding: 36px 32px;
     transition: border-color 0.2s, transform 0.2s;
   }
-  .lp-step-card:hover { border-color: rgba(108,99,255,0.3); transform: translateY(-3px); }
+  .lp-step-card:hover { border-color: rgba(99, 151, 255, 0.3); transform: translateY(-3px); }
   .lp-step-icon {
     width: 48px; height: 48px; border-radius: 12px;
-    background: rgba(108,99,255,0.15);
+    background: rgba(118, 158, 253, 0.26);
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 20px; font-size: 22px;
   }
@@ -249,8 +249,8 @@ const styles = `
 
   /* MISSION */
   .lp-mission-band {
-    background: rgba(108,99,255,0.08);
-    border-top: 1px solid rgba(108,99,255,0.15);
+    background: rgba(99, 156, 255, 0.2);
+    border-top: 1px solid rgba(99, 143, 255, 0.15);
     border-bottom: 1px solid rgba(108,99,255,0.15);
     padding: 80px 60px;
   }
@@ -282,7 +282,7 @@ const styles = `
   }
   .lp-footer-blob {
     position: absolute; width: 500px; height: 500px;
-    background: rgba(108,99,255,0.12); border-radius: 50%;
+    background: rgba(99, 161, 255, 0.24); border-radius: 50%;
     filter: blur(100px);
     top: 50%; left: 50%; transform: translate(-50%, -50%);
     pointer-events: none;
@@ -346,10 +346,10 @@ function RiskGauge({ score = 32 }) {
   const bandLabel = score < 35 ? 'Low Risk' : score < 65 ? 'Medium Risk' : 'High Risk'
 
   const bars = [
-    { label: 'Credit History', val: 78, color: '#6C63FF' },
-    { label: 'Income Ratio',   val: 55, color: '#9B93FF' },
-    { label: 'Loan Amount',    val: 40, color: '#6C63FF' },
-    { label: 'Employment',     val: 88, color: '#22C55E' },
+    { label: 'Credit History', val: 78, color: '#638aff' },
+    { label: 'Income Ratio',   val: 55, color: '#93c0ff' },
+    { label: 'Loan Amount',    val: 40, color: '#6392ff' },
+    { label: 'Employment',     val: 88, color: '#2266c5' },
   ]
 
   return (
@@ -363,8 +363,8 @@ function RiskGauge({ score = 32 }) {
           <path d={arc(120,100,100,63,117)} fill="none" stroke="#EAB308" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
           <path d={arc(120,100,100,117,180)} fill="none" stroke="#EF4444" strokeWidth="14" strokeLinecap="round" opacity="0.7"/>
           <g className="lp-needle" style={{ transform: `rotate(${animated ? needleDeg : -90}deg)` }}>
-            <line x1="120" y1="100" x2="120" y2="8" stroke="#b1adfc" strokeWidth="2.5" strokeLinecap="round"/>
-            <circle cx="120" cy="100" r="7" fill="#b1adfc" opacity="0.9"/>
+            <line x1="120" y1="100" x2="120" y2="8" stroke="#adc5fc" strokeWidth="2.5" strokeLinecap="round"/>
+            <circle cx="120" cy="100" r="7" fill="#adc5fc" opacity="0.9"/>
             <circle cx="120" cy="100" r="3.5" fill="#FFFF"/>
           </g>
         </svg>
@@ -455,11 +455,11 @@ export default function LandingPage() {
             </div>
             <div className="lp-stats">
               <div>
-                <div className="lp-stat-num">97.3%</div>
+                <div className="lp-stat-num">##.#%</div>
                 <div className="lp-stat-label">Model Accuracy</div>
               </div>
               <div>
-                <div className="lp-stat-num">307K+</div>
+                <div className="lp-stat-num">##.#K+</div>
                 <div className="lp-stat-label">Training Records</div>
               </div>
               <div>
