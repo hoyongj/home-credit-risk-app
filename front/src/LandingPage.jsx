@@ -13,7 +13,7 @@ const styles = `
   :root {
     --navy:   #F7F8FF;
     --navy2:  #2E3F7F;
-    --accent: #6C63FF; //#6C63FF
+    --accent: #827cf8e2; //#6C63FF
     --accent2: #9B93FF;
     --surf:   #060608; //  #F7F8FF
     --dark:   #0D1424;
@@ -39,7 +39,7 @@ const styles = `
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 18px 60px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(107, 99, 255, 0.29);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
