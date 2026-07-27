@@ -182,8 +182,9 @@ const styles = `
     transform: translateX(-50%); text-align: center;
   }
   .lp-gauge-score {
-    font-size: 36px; font-weight: 900; letter-spacing: -2px; color: var(--white);
+    font-size: 36px; font-weight: 900; letter-spacing: -2px; color: var(--white); opacity: 1.0, ;
     margin-bottom: 30px;
+    text-shadow: 0px 0px 10px rgba(20, 46, 92, 0.6);
   }
   .lp-gauge-band {
     font-size: 12px; font-weight: 600;
