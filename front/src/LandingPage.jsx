@@ -11,14 +11,14 @@ const styles = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy:   #1B2A5C;
+    --navy:   #F7F8FF;
     --navy2:  #2E3F7F;
-    --accent: #6C63FF;
-    --accent2:#9B93FF;
-    --surf:   #F7F8FF;
+    --accent: #6C63FF; //#6C63FF
+    --accent2: #9B93FF;
+    --surf:   #060608; //  #F7F8FF
     --dark:   #0D1424;
     --muted:  #7A8299;
-    --white:  #FFFFFF;
+    --white:  #060608;
     --green:  #22C55E;
     --yellow: #EAB308;
     --red:    #EF4444;
@@ -39,7 +39,7 @@ const styles = `
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 18px 60px;
-    background: rgba(27, 42, 92, 0.85);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
@@ -62,7 +62,7 @@ const styles = `
   }
   .lp-nav-links a {
     font-size: 14px; font-weight: 500;
-    color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s;
+    color: rgba(7, 7, 7, 0.65); text-decoration: none; transition: color 0.2s;
   }
   .lp-nav-links a:hover { color: var(--white); }
   .lp-nav-cta {
@@ -113,7 +113,7 @@ const styles = `
   .lp-hero-title .lp-accent { color: var(--accent); }
   .lp-hero-body {
     font-size: 17px; line-height: 1.7;
-    color: rgba(255,255,255,0.6);
+    color: rgba(0,0,0,0.6); //rgba(255,255,255,0.6)
     max-width: 460px; margin-bottom: 40px;
   }
   .lp-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
@@ -125,7 +125,7 @@ const styles = `
     font-size: 15px; font-weight: 700;
     border: none; cursor: pointer; text-decoration: none;
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 8px 32px rgba(108,99,255,0.35);
+    box-shadow: 0 8px 32px rgba(108,99,255,0.35); //rgba(108,99,255,0.35)
   }
   .lp-btn-primary:hover {
     background: #574fff; transform: translateY(-2px);
@@ -133,7 +133,7 @@ const styles = `
   }
   .lp-btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.7); //rgba(255,255,255,0.7)
     padding: 16px 24px; border-radius: 10px;
     font-size: 15px; font-weight: 500;
     border: 1px solid rgba(255,255,255,0.12);
@@ -214,7 +214,7 @@ const styles = `
   .lp-gauge-btn:hover { background: #574fff; transform: translateY(-1px); }
 
   /* HOW IT WORKS */
-  .lp-how-bg { background: rgba(0,0,0,0.15); }
+  .lp-how-bg { background: rgb(255, 255, 255); }
   .lp-section {
     padding: 100px 60px; max-width: 1200px; margin: 0 auto;
   }
@@ -243,7 +243,7 @@ const styles = `
     margin-bottom: 20px; font-size: 22px;
   }
   .lp-step-title { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
-  .lp-step-body { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.5); }
+  .lp-step-body { font-size: 14px; line-height: 1.7; color: rgba(6, 6, 6, 0.5); }
 
   /* MISSION */
   .lp-mission-band {
@@ -260,7 +260,7 @@ const styles = `
     font-size: clamp(26px, 3.5vw, 40px); font-weight: 800;
     letter-spacing: -1.5px; color: var(--white); margin-bottom: 20px;
   }
-  .lp-mission-body { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.55); }
+  .lp-mission-body { font-size: 16px; line-height: 1.8; color: rgb(0, 0, 0); }
   .lp-pillars { display: flex; flex-direction: column; gap: 20px; }
   .lp-pillar {
     display: flex; align-items: flex-start; gap: 16px;
@@ -271,7 +271,7 @@ const styles = `
   }
   .lp-pillar-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
   .lp-pillar-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-  .lp-pillar-body { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .lp-pillar-body { font-size: 13px; color: rgb(0, 0, 0); line-height: 1.6; }
 
   /* FOOTER CTA */
   .lp-footer-cta {
@@ -291,7 +291,7 @@ const styles = `
     margin-bottom: 16px; position: relative; z-index: 2;
   }
   .lp-footer-cta-sub {
-    font-size: 17px; color: rgba(255,255,255,0.5);
+    font-size: 17px; color: rgb(0, 0, 0);
     margin-bottom: 40px; position: relative; z-index: 2;
   }
   .lp-footer-cta .lp-btn-primary { position: relative; z-index: 2; }
@@ -409,7 +409,7 @@ export default function LandingPage() {
       <nav className="lp-nav">
         <Link to="/" className="lp-nav-logo">
           <div className="lp-nav-dot" />
-          PREDICT
+          CMPT 310 - Group 10
         </Link>
         <ul className="lp-nav-links">
           <li><a href="#mission">Mission</a></li>
@@ -472,7 +472,7 @@ export default function LandingPage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <div id="how" className="lp-how-bg">
+      <div id="how" className="glp-how-b">
         <div className="lp-section">
           <p className="lp-section-eyebrow">How it works</p>
           <h2 className="lp-section-title">Three steps to a risk score</h2>
