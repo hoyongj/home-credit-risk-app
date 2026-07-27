@@ -13,7 +13,7 @@ const styles = `
   :root {
     --navy:   #F7F8FF;
     --navy2:  #2E3F7F;
-    --accent: #1d3c89e2; //#6C63FF
+    --accent: #1d3f89e2; //#6C63FF
     --accent2: #93b3ff;
     --surf:   #060608; //  #F7F8FF
     --dark:   #0D1424;
@@ -45,7 +45,7 @@ const styles = `
   }
   .lp-nav-logo {
     font-size: 18px; font-weight: 800; letter-spacing: -0.5px;
-    color: var(--white); display: flex; align-items: center; gap: 10px;
+    color: black; display: flex; align-items: center; gap: 10px;
     text-decoration: none;
   }
   .lp-nav-dot {
@@ -67,7 +67,7 @@ const styles = `
   .lp-nav-links a:hover { color: var(--white); }
   .lp-nav-cta {
     background: var(--accent) !important;
-    color: var(--white) !important;
+    color: white !important;
     padding: 9px 22px !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
