@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 
 // In Docker/local dev this stays '/api' and nginx proxies it to the backend
@@ -16,11 +17,23 @@ const defaultForm = {
   DAYS_ID_PUBLISH: -6000,
 }
 
+const fieldMeta = {
+  DAYS_EMPLOYED:          { label: 'Days Employed',           hint: 'Negative = currently employed (e.g. −14600)' },
+  YEARS_BIRTH:            { label: 'Age (Years)',             hint: 'Applicant age in years' },
+  BUREAU_TOTAL_DEBT:      { label: 'Bureau Total Debt',       hint: 'Total outstanding debt from credit bureau' },
+  AMT_GOODS_PRICE:        { label: 'Goods Price (AMT)',       hint: 'Price of goods the loan is for' },
+  DAYS_LAST_PHONE_CHANGE: { label: 'Days Since Phone Change', hint: 'Number of days ago' },
+  DAYS_ID_PUBLISH:        { label: 'Days Since ID Published', hint: 'Number of days ago' },
+}
+
+
 function App() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState(defaultForm)
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [probability, setProbability] = useState(null)
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -34,6 +47,8 @@ function App() {
     event.preventDefault()
     setLoading(true)
     setError('')
+    setResult('')
+    setProbability(null)
 
     try {
       const response = await fetch(`${API_BASE}/predict`, {
@@ -50,6 +65,7 @@ function App() {
 
       const data = await response.json()
       setResult(data.status)
+      setProbability(data.probability)
     } catch {
       setError('Unable to get prediction. Please try again.')
       setResult('')
@@ -59,57 +75,141 @@ function App() {
   }
 
   return (
-    <main className="app">
-      <div className="card">
-        <h1>Loan Approval Predictor</h1>
-        <p className="subtitle">Enter applicant values and submit to get a decision.</p>
+    <div className="pr-root">
+      {/* NAV */}
+      <nav className="pr-nav">
+        <button className="pr-nav-logo" onClick={() => navigate('/')}>
+          <div className="pr-nav-dot" />
+          CMPT 310 - Group 10
+        </button>
+        <ul className="pr-nav-links">
+          <li>
+            <button className="pr-nav-back" onClick={() => navigate('/')}>
+              Back to Home
+            </button>
+          </li>
+        </ul>
+      </nav>
 
-        <form onSubmit={handleSubmit} className="form">
-          <label>
-            DAYS_EMPLOYED
-            <input name="DAYS_EMPLOYED" type="number" value={formData.DAYS_EMPLOYED} onChange={handleChange} required />
-          </label>
+      <main className="pr-main">
+        {/* LEFT — form */}
+        <div className="pr-left">
+          <div className="pr-header">
+            <p className="pr-eyebrow">Powered by Machine Learning</p>
+            <h1 className="pr-title">
+              Loan Default<br />
+              <span className="pr-title-accent">Risk Predictor</span>
+            </h1>
+            <p className="pr-subtitle">
+              Enter the applicant's financial details below to receive an instant approval decision.
+            </p>
+          </div>
 
-          <label>
-            YEARS_BIRTH
-            <input name="YEARS_BIRTH" type="number" step="0.1" value={formData.YEARS_BIRTH} onChange={handleChange} required />
-          </label>
+          <form onSubmit={handleSubmit} className="pr-form">
+            <div className="pr-form-grid">
+              {Object.entries(fieldMeta).map(([name, { label, hint }]) => (
+                <div className="pr-field" key={name}>
+                  <label className="pr-label" htmlFor={name}>{label}</label>
+                  <input
+                    id={name}
+                    className="pr-input"
+                    name={name}
+                    type="number"
+                    step="0.1"
+                    value={formData[name]}
+                    onChange={handleChange}
+                    required
+                  />
+                  <span className="pr-hint">{hint}</span>
+                </div>
+              ))}
 
-          <label>
-            BUREAU_TOTAL_DEBT
-            <input name="BUREAU_TOTAL_DEBT" type="number" step="0.1" value={formData.BUREAU_TOTAL_DEBT} onChange={handleChange} required />
-          </label>
+              <div className="pr-field pr-field-full">
+                <label className="pr-label" htmlFor="NAME_EDUCATION_TYPE">Education Level</label>
+                <select
+                  id="NAME_EDUCATION_TYPE"
+                  className="pr-input pr-select"
+                  name="NAME_EDUCATION_TYPE"
+                  value={formData.NAME_EDUCATION_TYPE}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="Academic degree">Academic degree</option>
+                  <option value="Higher education">Higher education</option>
+                  <option value="Incomplete higher">Incomplete higher</option>
+                  <option value="Secondary / secondary special">Secondary / secondary special</option>
+                  <option value="Lower secondary">Lower secondary</option>
+                </select>
+                <span className="pr-hint">Highest education level attained</span>
+              </div>
+            </div>
 
-          <label>
-            AMT_GOODS_PRICE
-            <input name="AMT_GOODS_PRICE" type="number" step="0.1" value={formData.AMT_GOODS_PRICE} onChange={handleChange} required />
-          </label>
+            <button className="pr-submit" type="submit" disabled={loading}>
+              {loading ? (
+                <>
+                  <span className="pr-spinner" />
+                  Analysing...
+                </>
+              ) : (
+                <>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  Run Prediction
+                </>
+              )}
+            </button>
+          </form>
+        </div>
 
-          <select name="NAME_EDUCATION_TYPE" value={formData.NAME_EDUCATION_TYPE} onChange={handleChange} required>
-            <option value="Academic degree">Academic degree</option>
-            <option value="Higher education">Higher education</option>
-            <option value="Incomplete higher">Incomplete higher</option>
-            <option value="Secondary / secondary special">Secondary / secondary special</option>
-            <option value="Lower secondary">Lower secondary</option>
-          </select>
+        {/* RIGHT — result panel */}
+        <div className="pr-right">
+          <div className="pr-result-card">
+            <p className="pr-result-label">Decision</p>
 
-          <label>
-            DAYS_LAST_PHONE_CHANGE
-            <input name="DAYS_LAST_PHONE_CHANGE" type="number" value={formData.DAYS_LAST_PHONE_CHANGE} onChange={handleChange} required />
-          </label>
+            {!result && !error && !loading && (
+              <div className="pr-result-empty">
+                <div className="pr-result-icon">⏳</div>
+                <p className="pr-result-msg">
+                  Fill in the form and run a prediction to see the decision here.
+                </p>
+              </div>
+            )}
 
-          <label>
-            DAYS_ID_PUBLISH
-            <input name="DAYS_ID_PUBLISH" type="number" value={formData.DAYS_ID_PUBLISH} onChange={handleChange} required />
-          </label>
+            {loading && (
+              <div className="pr-result-empty">
+                <div className="pr-big-spinner" />
+                <p className="pr-result-msg">Running model analysis…</p>
+              </div>
+            )}
 
-          <button type="submit" disabled={loading}>{loading ? 'Checking...' : 'Predict'}</button>
-        </form>
+            {result && !loading && (
+              <div className={`pr-result-verdict ${result === 'APPROVE' ? 'pr-approve' : 'pr-deny'}`}>
+                <div className="pr-verdict-icon">{result === 'APPROVE' ? '✓' : '✕'}</div>
+                <div className="pr-verdict-text">{result}</div>
+                {probability !== null && (
+                  <div className="pr-verdict-prob">
+                    Default probability: {(probability * 100).toFixed(1)}%
+                  </div>
+                )}
+                <p className="pr-verdict-sub">
+                  {result === 'APPROVE'
+                    ? 'The applicant meets the risk criteria for loan approval.'
+                    : 'The applicant does not meet the risk criteria at this time.'}
+                </p>
+              </div>
+            )}
 
-        {result && <p className={`result ${result === 'APPROVE' ? 'approve' : 'deny'}`}>{result}</p>}
-        {error && <p className="error">{error}</p>}
-      </div>
-    </main>
+            {error && !loading && (
+              <div className="pr-result-empty">
+                <div className="pr-result-icon">⚠️</div>
+                <p className="pr-result-msg pr-error-msg">{error}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
   )
 }
 
