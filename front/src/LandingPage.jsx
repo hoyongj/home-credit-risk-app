@@ -182,9 +182,9 @@ const styles = `
     transform: translateX(-50%); text-align: center;
   }
   .lp-gauge-score {
-    font-size: 36px; font-weight: 900; letter-spacing: -2px; color: var(--white); opacity: 1.0, ;
+    font-size: 36px; font-weight: 900; letter-spacing: -2px; color:rgba(4, 22, 53, 0.62); opacity: 1.0, ;
     margin-bottom: 30px;
-    text-shadow: 0px 0px 10px rgba(20, 46, 92, 0.6);
+    text-shadow: 0px 0px 8.5px rgba(20, 46, 92, 0.5);
   }
   .lp-gauge-band {
     font-size: 12px; font-weight: 600;
@@ -347,10 +347,10 @@ function RiskGauge({ score = 32 }) {
   const bandLabel = score < 35 ? 'Low Risk' : score < 65 ? 'Medium Risk' : 'High Risk'
 
   const bars = [
-    { label: 'Credit History', val: 78, color: '#638aff' },
-    { label: 'Income Ratio',   val: 55, color: '#93c0ff' },
-    { label: 'Loan Amount',    val: 40, color: '#6392ff' },
-    { label: 'Employment',     val: 88, color: '#2266c5' },
+    { label: 'Bureau Total Debt', val: 78, color: '#638aff' },
+    { label: 'Goods Price (AMT)',   val: 55, color: '#93c0ff' },
+    { label: 'Employment Ratio',    val: 40, color: '#6392ff' },
+    { label: 'Loan Amount',     val: 88, color: '#c5226185' },
   ]
 
   return (
@@ -399,8 +399,8 @@ export default function LandingPage() {
   const navigate = useNavigate()
 
   const pillars = [
-    { icon: '✴︎', title: 'Accuracy First',   body: 'Trained on real-world Home Credit data with rigorous cross-validation to keep false-positive rates low.' },
-    { icon: '✴︎', title: 'Explainability',   body: 'Every prediction surfaces the top contributing features so loan officers understand the reasoning, not just the number.' },
+    { icon: '✴︎', title: 'Accuracy First',   body: 'Trained on real-world Home Credit data with binary cross-entropy to minimize loss and improve model performance.' },
+    { icon: '✴︎', title: 'Straightforward',   body: 'Clear and easy-to-understand risk assessments help lenders make informed decisions.' },
     { icon: '✴︎', title: 'Fast Decisions',   body: 'Sub-second inference time means applicants get answers quickly, improving the customer experience end to end.' },
   ]
 
@@ -441,8 +441,7 @@ export default function LandingPage() {
               <span className="lp-accent">Predictor</span>
             </h1>
             <p className="lp-hero-body">
-              Assess loan default risk in seconds. Our model analyzes credit
-              history, income ratios, and employment data to surface a clear
+              Assess loan default risk in seconds. Our model analyzes employment data, total debt, and other financial indicators to surface a clear
               risk score — so lenders can make faster, fairer decisions.
             </p>
             <div className="lp-actions">
@@ -456,11 +455,11 @@ export default function LandingPage() {
             </div>
             <div className="lp-stats">
               <div>
-                <div className="lp-stat-num">##.#%</div>
+                <div className="lp-stat-num">92%</div>
                 <div className="lp-stat-label">Model Accuracy</div>
               </div>
               <div>
-                <div className="lp-stat-num">##.#K+</div>
+                <div className="lp-stat-num">200K+</div>
                 <div className="lp-stat-label">Training Records</div>
               </div>
               <div>
@@ -481,9 +480,9 @@ export default function LandingPage() {
           <h2 className="lp-section-title">Three steps to a risk score</h2>
           <div className="lp-steps">
             {[
-              { icon: '📋', title: 'Enter Applicant Data',  body: 'Fill in the loan application form with credit history, income, employment status, loan amount, and other key financial signals.' },
-              { icon: '⚙️', title: 'Model Runs Analysis',   body: 'Our trained gradient-boosted classifier processes the inputs against patterns learned from 300 000+ real Home Credit applications.' },
-              { icon: '📊', title: 'Get a Risk Score',      body: 'Receive an instant APPROVE or DENY decision with a clear breakdown of the factors that drove the outcome.' },
+              { icon: '📋', title: 'Enter Applicant Data',  body: 'Fill in the loan application form with income, education status, loan amount, and other key financial signals.' },
+              { icon: '⚙️', title: 'Model Runs Analysis',   body: 'Our KNN-trained model processes the inputs against patterns learned from 200K+ real Home Credit applications.' },
+              { icon: '📊', title: 'Get a Risk Score',      body: 'Receive an instant and straightforward APPROVE or DENY decision based on the analysis.' },
             ].map((s) => (
               <div className="lp-step-card" key={s.title}>
                 <div className="lp-step-icon">{s.icon}</div>
