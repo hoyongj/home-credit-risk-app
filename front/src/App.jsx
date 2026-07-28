@@ -30,7 +30,7 @@ const fieldMeta = {
 function App() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState(defaultForm)
-  const [result, setResult] = useState('') // change this to approve if want to test approve
+  const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [probability, setProbability] = useState(null)
@@ -75,35 +75,42 @@ function App() {
     event.preventDefault()
 
     const validationError = validateForm(formData)
+    if (validationError) {
+      setError(validationError)
+      return
+    }
+
     const snapshot = { ...formData }
     setSubmittedData(snapshot)
     setLoading(true)
     setError('')
-    setResult('') // set APPROVE TO TEST
+    setResult('')
     setProbability(null)
 
     try {
-      // ---- comment this when API is connected, purely for testing !!!!! ----
-      await new Promise((resolve) => setTimeout(resolve, 1000)) // fake network delay
-      const data = {
-        status: Math.random() > 0.5 ? 'APPROVE' : 'DENY',
-        probability: Math.random(),
+      // The model was trained on Home Credit's raw convention where these
+      // are negative ("days before application"). The form collects them
+      // as positive "days ago" for a more intuitive UI, so negate here.
+      const payload = {
+        ...snapshot,
+        DAYS_EMPLOYED: -snapshot.DAYS_EMPLOYED,
+        DAYS_LAST_PHONE_CHANGE: -snapshot.DAYS_LAST_PHONE_CHANGE,
+        DAYS_ID_PUBLISH: -snapshot.DAYS_ID_PUBLISH,
       }
 
-      // ---- uncomment this when API is connected !!!!!!!! -----
-      // const response = await fetch(`${API_BASE}/predict`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(snapshot),
-      // })
+      const response = await fetch(`${API_BASE}/predict`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
 
-      // if (!response.ok) {
-      //   throw new Error('Prediction request failed')
-      // }
+      if (!response.ok) {
+        throw new Error('Prediction request failed')
+      }
 
-      // const data = await response.json()
+      const data = await response.json()
 
       setResult(data.status)
       setProbability(data.probability)
