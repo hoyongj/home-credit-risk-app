@@ -8,17 +8,17 @@ import './App.css'
 const API_BASE = import.meta.env.VITE_API_URL || '/api'
 
 const defaultForm = {
-  DAYS_EMPLOYED: -14600,
-  YEARS_BIRTH: 65,
+  DAYS_EMPLOYED: 0,
+  YEARS_BIRTH: 0,
   BUREAU_TOTAL_DEBT: 0,
-  AMT_GOODS_PRICE: 45000,
+  AMT_GOODS_PRICE: 0,
   NAME_EDUCATION_TYPE: 'Academic degree',
-  DAYS_LAST_PHONE_CHANGE: -4000,
-  DAYS_ID_PUBLISH: -6000,
+  DAYS_LAST_PHONE_CHANGE: 0,
+  DAYS_ID_PUBLISH: 0,
 }
 
 const fieldMeta = {
-  DAYS_EMPLOYED:          { label: 'Days Employed',           hint: 'Negative = currently employed (e.g. −14600)' },
+  DAYS_EMPLOYED:          { label: 'Days Employed',           hint: '' },
   YEARS_BIRTH:            { label: 'Age (Years)',             hint: 'Applicant age in years' },
   BUREAU_TOTAL_DEBT:      { label: 'Bureau Total Debt',       hint: 'Total outstanding debt from credit bureau' },
   AMT_GOODS_PRICE:        { label: 'Goods Price (AMT)',       hint: 'Price of goods the loan is for' },
@@ -95,7 +95,6 @@ function App() {
         {/* LEFT — form */}
         <div className="pr-left">
           <div className="pr-header">
-            <p className="pr-eyebrow">Powered by Machine Learning</p>
             <h1 className="pr-title">
               Loan Default<br />
               <span className="pr-title-accent">Risk Predictor</span>
@@ -115,7 +114,7 @@ function App() {
                     className="pr-input"
                     name={name}
                     type="number"
-                    step="0.1"
+                    step="1"
                     value={formData[name]}
                     onChange={handleChange}
                     required
@@ -134,10 +133,10 @@ function App() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="Academic degree">Academic degree</option>
-                  <option value="Higher education">Higher education</option>
-                  <option value="Incomplete higher">Incomplete higher</option>
-                  <option value="Secondary / secondary special">Secondary / secondary special</option>
+                  <option value="Academic degree">Select Option</option>
+                  <option value="Master's degree">Master's degree</option>
+                  <option value="Bachelor's degree">Bachelor's degree</option>
+                  <option value="High school graduate">High school graduate</option>
                   <option value="Lower secondary">Lower secondary</option>
                 </select>
                 <span className="pr-hint">Highest education level attained</span>

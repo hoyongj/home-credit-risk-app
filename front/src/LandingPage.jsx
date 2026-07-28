@@ -87,12 +87,12 @@ const styles = `
   }
   .lp-blob-1 {
     width: 600px; height: 600px;
-    background: rgba(77, 120, 184, 0.31);
+    background: rgba(77, 120, 184, 0.23);
     top: -100px; right: -100px;
   }
   .lp-blob-2 {
     width: 400px; height: 400px;
-    background: rgba(34,197,94,0.08);
+    background: rgba(34, 116, 197, 0.16);
     bottom: 0; left: 200px;
   }
   .lp-hero-inner {
@@ -120,7 +120,7 @@ const styles = `
 
   .lp-btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: "white";
+    background: var(--accent); color: var(--navy);
     padding: 16px 32px; border-radius: 10px;
     font-size: 15px; font-weight: 700;
     border: none; cursor: pointer; text-decoration: none;
@@ -208,7 +208,7 @@ const styles = `
 
   .lp-gauge-btn {
     margin-top: 28px; width: 100%;
-    background: var(--accent); color: "white";
+    background: var(--accent); color: var(--navy);
     padding: 14px; border-radius: 10px;
     font-size: 14px; font-weight: 700;
     border: none; cursor: pointer; text-align: center;
@@ -399,9 +399,9 @@ export default function LandingPage() {
   const navigate = useNavigate()
 
   const pillars = [
-    { icon: '🎯', title: 'Accuracy First',   body: 'Trained on real-world Home Credit data with rigorous cross-validation to keep false-positive rates low.' },
-    { icon: '🔍', title: 'Explainability',   body: 'Every prediction surfaces the top contributing features so loan officers understand the reasoning, not just the number.' },
-    { icon: '⚡', title: 'Fast Decisions',   body: 'Sub-second inference time means applicants get answers quickly, improving the customer experience end to end.' },
+    { icon: '✴︎', title: 'Accuracy First',   body: 'Trained on real-world Home Credit data with rigorous cross-validation to keep false-positive rates low.' },
+    { icon: '✴︎', title: 'Explainability',   body: 'Every prediction surfaces the top contributing features so loan officers understand the reasoning, not just the number.' },
+    { icon: '✴︎', title: 'Fast Decisions',   body: 'Sub-second inference time means applicants get answers quickly, improving the customer experience end to end.' },
   ]
 
   return (
