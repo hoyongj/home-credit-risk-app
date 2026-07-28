@@ -74,6 +74,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
+    const validationError = validateForm(formData)
     const snapshot = { ...formData }
     setSubmittedData(snapshot)
     setLoading(true)
