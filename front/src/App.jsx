@@ -12,7 +12,7 @@ const defaultForm = {
   YEARS_BIRTH: 0,
   BUREAU_TOTAL_DEBT: 0,
   AMT_GOODS_PRICE: 0,
-  NAME_EDUCATION_TYPE: 'Academic degree',
+  NAME_EDUCATION_TYPE: '',
   DAYS_LAST_PHONE_CHANGE: 0,
   DAYS_ID_PUBLISH: 0,
 }
@@ -30,10 +30,12 @@ const fieldMeta = {
 function App() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState(defaultForm)
-  const [result, setResult] = useState('')
+  const [result, setResult] = useState('') // change this to approve if want to test approve
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [probability, setProbability] = useState(null)
+
+  const [submittedData, setSubmittedData] = useState(null) // show used data
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -45,25 +47,37 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    const snapshot = { ...formData }
+    setSubmittedData(snapshot)
     setLoading(true)
     setError('')
-    setResult('')
+    setResult('') // set APPROVE TO TEST
     setProbability(null)
 
     try {
-      const response = await fetch(`${API_BASE}/predict`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        throw new Error('Prediction request failed')
+      // ---- comment this when API is connected, purely for testing !!!!! ----
+      await new Promise((resolve) => setTimeout(resolve, 1000)) // fake network delay
+      const data = {
+        status: Math.random() > 0.5 ? 'APPROVE' : 'DENY',
+        probability: Math.random(),
       }
 
-      const data = await response.json()
+      // ---- uncomment this when API is connected !!!!!!!! -----
+      // const response = await fetch(`${API_BASE}/predict`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(snapshot),
+      // })
+
+      // if (!response.ok) {
+      //   throw new Error('Prediction request failed')
+      // }
+
+      // const data = await response.json()
+
       setResult(data.status)
       setProbability(data.probability)
     } catch {
@@ -115,6 +129,7 @@ function App() {
                     name={name}
                     type="number"
                     step="1"
+                    min='0'
                     value={formData[name]}
                     onChange={handleChange}
                     required
@@ -133,7 +148,7 @@ function App() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="Academic degree">Select Option</option>
+                  <option value="">Select Option</option>
                   <option value="Master's degree">Master's degree</option>
                   <option value="Bachelor's degree">Bachelor's degree</option>
                   <option value="High school graduate">High school graduate</option>
@@ -202,19 +217,19 @@ function App() {
                   <br /><br /><br />
                   <strong>Variables Used:</strong>
                   <br />
-                  Days Employed: {formData.DAYS_EMPLOYED}
+                  Days Employed: {submittedData?.DAYS_EMPLOYED}
                   <br />
-                  Age (Years): {formData.YEARS_BIRTH}
+                  Age (Years): {submittedData?.YEARS_BIRTH}
                   <br />
-                  Bureau Total Debt: {formData.BUREAU_TOTAL_DEBT}
+                  Bureau Total Debt: {submittedData?.BUREAU_TOTAL_DEBT}
                   <br />
-                  Goods Price (AMT): {formData.AMT_GOODS_PRICE}
+                  Goods Price (AMT): {submittedData?.AMT_GOODS_PRICE}
                   <br />
-                  Education Level: {formData.NAME_EDUCATION_TYPE}
+                  Education Level: {submittedData?.NAME_EDUCATION_TYPE}
                   <br />
-                  Days Since Phone Change: {formData.DAYS_LAST_PHONE_CHANGE}
+                  Days Since Phone Change: {submittedData?.DAYS_LAST_PHONE_CHANGE}
                   <br />
-                  Days Since ID Published: {formData.DAYS_ID_PUBLISH}
+                  Days Since ID Published: {submittedData?.DAYS_ID_PUBLISH}
                 </p>
               </div>
             )}
@@ -225,6 +240,7 @@ function App() {
                 <p className="pr-result-msg pr-error-msg">{error}</p>
               </div>
             )}
+
           </div>
         </div>
       </main>
