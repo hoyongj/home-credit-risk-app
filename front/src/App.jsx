@@ -45,6 +45,32 @@ function App() {
     }))
   }
 
+    const validateForm = (data) => {
+    if (!data.NAME_EDUCATION_TYPE) {
+      return 'Please select an education level.'
+    }
+    if (data.YEARS_BIRTH <= 0) {
+      return 'Age must be greater than 0.'
+    }
+
+    const numericFields = [
+      'DAYS_EMPLOYED',
+      'YEARS_BIRTH',
+      'BUREAU_TOTAL_DEBT',
+      'AMT_GOODS_PRICE',
+      'DAYS_LAST_PHONE_CHANGE',
+      'DAYS_ID_PUBLISH',
+    ]
+
+    for (const field of numericFields) {
+      if (data[field] < 0) {
+        return `${fieldMeta[field]?.label || field} cannot be negative.`
+      }
+    }
+
+    return null
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
