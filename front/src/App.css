@@ -235,6 +235,11 @@
   color: rgba(6,6,8,0.55); max-width: 260px;
 }
 
+.pr-verdict-variables {
+  font-size: 12px; line-height: 1.5;
+  color: rgba(6,6,8,0.45); max-width: 260px;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .pr-nav { padding: 16px 24px; }

@@ -196,6 +196,26 @@ function App() {
                     ? 'The applicant meets the risk criteria for loan approval.'
                     : 'The applicant does not meet the risk criteria at this time.'}
                 </p>
+                
+                {/*print out variables that were used for calculations in case user changes them during calculation */}
+                <p className="pr-verdict-variables">
+                  <br /><br /><br />
+                  <strong>Variables Used:</strong>
+                  <br />
+                  Days Employed: {formData.DAYS_EMPLOYED}
+                  <br />
+                  Age (Years): {formData.YEARS_BIRTH}
+                  <br />
+                  Bureau Total Debt: {formData.BUREAU_TOTAL_DEBT}
+                  <br />
+                  Goods Price (AMT): {formData.AMT_GOODS_PRICE}
+                  <br />
+                  Education Level: {formData.NAME_EDUCATION_TYPE}
+                  <br />
+                  Days Since Phone Change: {formData.DAYS_LAST_PHONE_CHANGE}
+                  <br />
+                  Days Since ID Published: {formData.DAYS_ID_PUBLISH}
+                </p>
               </div>
             )}
 
