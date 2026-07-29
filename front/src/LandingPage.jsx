@@ -104,6 +104,7 @@ const styles = `
   .lp-eyebrow {
     font-size: 12px; font-weight: 600; letter-spacing: 2.5px;
     text-transform: uppercase; color: var(--accent2); margin-bottom: 20px;
+    text-decoration: none;
   }
   .lp-hero-title {
     font-size: clamp(38px, 5vw, 60px);
@@ -435,8 +436,13 @@ export default function LandingPage() {
         <div className="lp-blob lp-blob-2" />
         <div className="lp-hero-inner">
           <div>
-            <p className="lp-eyebrow">Powered by Machine Learning</p>
-            <h1 className="lp-hero-title">
+            <a className="lp-eyebrow" 
+                href="https://www.kaggle.com/competitions/home-credit-default-risk/overview"
+                target="_blank"
+                rel="noreferrer">
+                  Trained on the Kaggle Home Credit Default Risk Dataset
+            </a>
+            <h1 className="lp-hero-title" style={{ marginTop: '20px' }}>
               Default Risk<br />
               <span className="lp-accent">Predictor</span>
             </h1>
