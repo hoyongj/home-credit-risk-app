@@ -131,7 +131,7 @@ function App() {
       <nav className="pr-nav">
         <button className="pr-nav-logo" onClick={() => navigate('/')}>
           <div className="pr-nav-dot" />
-          CMPT 310 - Group 10
+          CMPT 310: Group 10
         </button>
         <ul className="pr-nav-links">
           <li>

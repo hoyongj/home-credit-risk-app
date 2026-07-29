@@ -413,7 +413,7 @@ export default function LandingPage() {
       <nav className="lp-nav">
         <Link to="/" className="lp-nav-logo">
           <div className="lp-nav-dot" />
-          CMPT 310 - Group 10
+          CMPT 310: Group 10
         </Link>
         <ul className="lp-nav-links">
           <li><a href="#mission">Mission</a></li>
