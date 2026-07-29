@@ -7,14 +7,17 @@ import './App.css'
 // time to the Render backend's URL, e.g. https://your-api.onrender.com
 const API_BASE = import.meta.env.VITE_API_URL || '/api'
 
+// Preset values mirror the model's expected ranges. Days fields are stored
+// here as positive "days ago" to match the UI convention; they get negated
+// before being sent to the API (see handleSubmit).
 const defaultForm = {
-  DAYS_EMPLOYED: 0,
-  YEARS_BIRTH: 0,
+  DAYS_EMPLOYED: 14600,
+  YEARS_BIRTH: 65,
   BUREAU_TOTAL_DEBT: 0,
-  AMT_GOODS_PRICE: 0,
-  NAME_EDUCATION_TYPE: '',
-  DAYS_LAST_PHONE_CHANGE: 0,
-  DAYS_ID_PUBLISH: 0,
+  AMT_GOODS_PRICE: 45000,
+  NAME_EDUCATION_TYPE: 'Academic degree',
+  DAYS_LAST_PHONE_CHANGE: 4000,
+  DAYS_ID_PUBLISH: 6000,
 }
 
 const fieldMeta = {
@@ -183,9 +186,10 @@ function App() {
                   required
                 >
                   <option value="">Select Option</option>
-                  <option value="Master's degree">Master's degree</option>
-                  <option value="Bachelor's degree">Bachelor's degree</option>
-                  <option value="High school graduate">High school graduate</option>
+                  <option value="Academic degree">Academic degree</option>
+                  <option value="Higher education">Higher education</option>
+                  <option value="Incomplete higher">Incomplete higher</option>
+                  <option value="Secondary / secondary special">Secondary / secondary special</option>
                   <option value="Lower secondary">Lower secondary</option>
                 </select>
                 <span className="pr-hint">Highest education level attained</span>
