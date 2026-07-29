@@ -11,22 +11,22 @@ const API_BASE = import.meta.env.VITE_API_URL || '/api'
 // here as positive "days ago" to match the UI convention; they get negated
 // before being sent to the API (see handleSubmit).
 const defaultForm = {
-  DAYS_EMPLOYED: 14600,
-  YEARS_BIRTH: 65,
-  BUREAU_TOTAL_DEBT: 0,
-  AMT_GOODS_PRICE: 45000,
-  NAME_EDUCATION_TYPE: 'Academic degree',
-  DAYS_LAST_PHONE_CHANGE: 4000,
-  DAYS_ID_PUBLISH: 6000,
+  DAYS_EMPLOYED: '',
+  YEARS_BIRTH: '',
+  BUREAU_TOTAL_DEBT: '',
+  AMT_GOODS_PRICE: '',
+  NAME_EDUCATION_TYPE: '',
+  DAYS_LAST_PHONE_CHANGE: '',
+  DAYS_ID_PUBLISH: '',
 }
 
 const fieldMeta = {
-  DAYS_EMPLOYED:          { label: 'Days Employed',           hint: '' },
-  YEARS_BIRTH:            { label: 'Age (Years)',             hint: 'Applicant age in years' },
-  BUREAU_TOTAL_DEBT:      { label: 'Bureau Total Debt',       hint: 'Total outstanding debt from credit bureau' },
-  AMT_GOODS_PRICE:        { label: 'Goods Price (AMT)',       hint: 'Price of goods the loan is for' },
-  DAYS_LAST_PHONE_CHANGE: { label: 'Days Since Phone Change', hint: 'Number of days ago' },
-  DAYS_ID_PUBLISH:        { label: 'Days Since ID Published', hint: 'Number of days ago' },
+  DAYS_EMPLOYED:          { label: 'Days Employed',           hint: '',                                           placeholder: 'e.g. 14600'  },
+  YEARS_BIRTH:            { label: 'Age (Years)',             hint: 'Applicant age in years',                     placeholder: 'e.g. 35'     },
+  BUREAU_TOTAL_DEBT:      { label: 'Bureau Total Debt',       hint: 'Total outstanding debt from credit bureau',  placeholder: 'e.g. 50000'  },
+  AMT_GOODS_PRICE:        { label: 'Goods Price (AMT)',       hint: 'Price of goods the loan is for',             placeholder: 'e.g. 45000'  },
+  DAYS_LAST_PHONE_CHANGE: { label: 'Days Since Phone Change', hint: 'Number of days ago',                         placeholder: 'e.g. 4000'   },
+  DAYS_ID_PUBLISH:        { label: 'Days Since ID Published', hint: 'Number of days ago',                         placeholder: 'e.g. 6000'  },
 }
 
 
@@ -157,7 +157,7 @@ function App() {
 
           <form onSubmit={handleSubmit} className="pr-form">
             <div className="pr-form-grid">
-              {Object.entries(fieldMeta).map(([name, { label, hint }]) => (
+              {Object.entries(fieldMeta).map(([name, { label, hint, placeholder}]) => (
                 <div className="pr-field" key={name}>
                   <label className="pr-label" htmlFor={name}>{label}</label>
                   <input
@@ -169,6 +169,7 @@ function App() {
                     min='0'
                     value={formData[name]}
                     onChange={handleChange}
+                    placeholder={placeholder}
                     required
                   />
                   <span className="pr-hint">{hint}</span>
@@ -186,11 +187,11 @@ function App() {
                   required
                 >
                   <option value="">Select Option</option>
-                  <option value="Academic degree">Academic degree</option>
-                  <option value="Higher education">Higher education</option>
-                  <option value="Incomplete higher">Incomplete higher</option>
-                  <option value="Secondary / secondary special">Secondary / secondary special</option>
-                  <option value="Lower secondary">Lower secondary</option>
+                  <option value="Academic degree">Masters/Professional/Doctorate degree</option>
+                  <option value="Higher education">Bachelor's Degree/College Diploma</option>
+                  <option value="Incomplete higher">University or College Credit, no degree</option>
+                  <option value="Secondary / secondary special">High School Diploma</option>
+                  <option value="Lower secondary">No High School Diploma</option>
                 </select>
                 <span className="pr-hint">Highest education level attained</span>
               </div>
