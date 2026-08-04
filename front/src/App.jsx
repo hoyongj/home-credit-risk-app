@@ -21,12 +21,12 @@ const defaultForm = {
 }
 
 const fieldMeta = {
-  DAYS_EMPLOYED:          { label: 'Days Employed',           hint: '',                                           placeholder: 'e.g. 14600'  },
-  YEARS_BIRTH:            { label: 'Age (Years)',             hint: 'Applicant age in years',                     placeholder: 'e.g. 35'     },
-  BUREAU_TOTAL_DEBT:      { label: 'Bureau Total Debt',       hint: 'Total outstanding debt from credit bureau',  placeholder: 'e.g. 50000'  },
-  AMT_GOODS_PRICE:        { label: 'Goods Price (AMT)',       hint: 'Price of goods the loan is for',             placeholder: 'e.g. 45000'  },
-  DAYS_LAST_PHONE_CHANGE: { label: 'Days Since Phone Change', hint: 'Number of days ago',                         placeholder: 'e.g. 4000'   },
-  DAYS_ID_PUBLISH:        { label: 'Days Since ID Published', hint: 'Number of days ago',                         placeholder: 'e.g. 6000'  },
+  DAYS_EMPLOYED: { label: 'Days Employed', hint: '', placeholder: 'e.g. 3600' },
+  YEARS_BIRTH: { label: 'Age (Years)', hint: 'Applicant age in years', placeholder: 'e.g. 35' },
+  BUREAU_TOTAL_DEBT: { label: 'Bureau Total Debt', hint: 'Total outstanding debt from credit bureau', placeholder: 'e.g. 50000' },
+  AMT_GOODS_PRICE: { label: 'Goods Price (AMT)', hint: 'Price of goods the loan is for', placeholder: 'e.g. 45000' },
+  DAYS_LAST_PHONE_CHANGE: { label: 'Days Since Phone Change', hint: 'Number of days ago', placeholder: 'e.g. 4000' },
+  DAYS_ID_PUBLISH: { label: 'Days Since ID Published', hint: 'Number of days ago', placeholder: 'e.g. 6000' },
 }
 
 
@@ -48,7 +48,7 @@ function App() {
     }))
   }
 
-    const validateForm = (data) => {
+  const validateForm = (data) => {
     if (!data.NAME_EDUCATION_TYPE) {
       return 'Please select an education level.'
     }
@@ -157,7 +157,7 @@ function App() {
 
           <form onSubmit={handleSubmit} className="pr-form">
             <div className="pr-form-grid">
-              {Object.entries(fieldMeta).map(([name, { label, hint, placeholder}]) => (
+              {Object.entries(fieldMeta).map(([name, { label, hint, placeholder }]) => (
                 <div className="pr-field" key={name}>
                   <label className="pr-label" htmlFor={name}>{label}</label>
                   <input
@@ -233,6 +233,10 @@ function App() {
               <div className="pr-result-empty">
                 <div className="pr-big-spinner" />
                 <p className="pr-result-msg">Running model analysis…</p>
+                <p className="pr-result-msg" style={{ marginTop: 8, fontSize: 12 }}>
+                  Model inference itself takes ~13ms — if this is the first request in a
+                  while, our free-tier server may need up to 30s to wake up first.
+                </p>
               </div>
             )}
 
@@ -250,7 +254,7 @@ function App() {
                     ? 'The applicant meets the risk criteria for loan approval.'
                     : 'The applicant does not meet the risk criteria at this time.'}
                 </p>
-                
+
                 {/*print out variables that were used for calculations in case user changes them during calculation */}
                 <p className="pr-verdict-variables">
                   <br /><br /><br />

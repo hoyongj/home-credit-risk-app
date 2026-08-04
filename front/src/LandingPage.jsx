@@ -233,6 +233,22 @@ const styles = `
     margin-bottom: 60px; color: var(--white);
   }
   .lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .lp-compare { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 44px; }
+  .lp-compare-card {
+    border-radius: 18px; padding: 32px 32px 28px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .lp-compare-bad  { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.18); }
+  .lp-compare-good { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); }
+  .lp-compare-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lp-compare-bad .lp-compare-label  { color: var(--red); }
+  .lp-compare-good .lp-compare-label { color: var(--green); }
+  .lp-compare-num { font-size: 34px; font-weight: 900; letter-spacing: -1.5px; color: var(--white); margin-bottom: 6px; }
+  .lp-compare-sub { font-size: 13px; color: rgba(6,6,6,0.55); line-height: 1.6; }
+  @media (max-width: 900px) { .lp-compare { grid-template-columns: 1fr; } }
   .lp-step-card {
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.07);
@@ -400,9 +416,9 @@ export default function LandingPage() {
   const navigate = useNavigate()
 
   const pillars = [
-    { icon: '✴︎', title: 'Accuracy First',   body: 'Trained on real-world Home Credit data with binary cross-entropy to minimize loss and improve model performance.' },
+    { icon: '✴︎', title: 'Profit, Not Just Accuracy',   body: 'On a dataset where 92% of applicants repay, "accurate" models can just approve everyone. We optimize for expected profit instead, which is why our threshold sits at 9.09%, not 50%.' },
     { icon: '✴︎', title: 'Straightforward',   body: 'Clear and easy-to-understand risk assessments help lenders make informed decisions.' },
-    { icon: '✴︎', title: 'Fast Decisions',   body: 'Sub-second inference time means applicants get answers quickly, improving the customer experience end to end.' },
+    { icon: '✴︎', title: 'Built for Real-Time',   body: 'The live decision engine runs on a lightweight Decision Tree — 13ms per prediction — chosen specifically so applicants get an answer without a heavyweight model in the way.' },
   ]
 
   return (
@@ -416,8 +432,9 @@ export default function LandingPage() {
           CMPT 310: Group 10
         </Link>
         <ul className="lp-nav-links">
-          <li><a href="#mission">Mission</a></li>
+          <li><a href="#challenge">The Challenge</a></li>
           <li><a href="#how">How it works</a></li>
+          <li><a href="#mission">What We Built</a></li>
           <li>
             <button
               className="lp-btn-primary lp-nav-cta"
@@ -461,16 +478,16 @@ export default function LandingPage() {
             </div>
             <div className="lp-stats">
               <div>
-                <div className="lp-stat-num">92%</div>
-                <div className="lp-stat-label">Model Accuracy</div>
+                <div className="lp-stat-num">307K+</div>
+                <div className="lp-stat-label">Applications Analyzed</div>
               </div>
               <div>
-                <div className="lp-stat-num">200K+</div>
-                <div className="lp-stat-label">Training Records</div>
+                <div className="lp-stat-num">13ms</div>
+                <div className="lp-stat-label">Model Inference Time</div>
               </div>
               <div>
-                <div className="lp-stat-num">&lt; 1s</div>
-                <div className="lp-stat-label">Prediction Time</div>
+                <div className="lp-stat-num">9.09%</div>
+                <div className="lp-stat-label">Profit-Optimal Threshold</div>
               </div>
             </div>
           </div>
@@ -478,6 +495,40 @@ export default function LandingPage() {
           <RiskGauge score={32} />
         </div>
       </section>
+
+      {/* THE CHALLENGE */}
+      <div id="challenge" className="lp-mission-band">
+        <div className="lp-section" style={{ padding: 0 }}>
+          <p className="lp-section-eyebrow">The Challenge</p>
+          <h2 className="lp-section-title">A model that's 92% "accurate" can still be useless</h2>
+          <p className="lp-mission-body" style={{ maxWidth: 720, margin: '0 auto 8px', textAlign: 'center' }}>
+            Only 8% of applicants in our historical data actually default. That means a model
+            can hit 92% accuracy just by approving <em>every single applicant</em> — which is
+            exactly what our first baseline models did. We rebuilt our evaluation around
+            expected profit instead of accuracy, and derived a decision threshold straight from
+            the bank's own economics: approve only if the probability of default is below 9.09%.
+          </p>
+          <div className="lp-compare">
+            <div className="lp-compare-card lp-compare-bad">
+              <div className="lp-compare-label">Naive baseline</div>
+              <div className="lp-compare-num">688.8</div>
+              <p className="lp-compare-sub">
+                Expected profit (loan units) from approving everyone, or from any model run at
+                the default 50% threshold — statistically indistinguishable from no model at all.
+              </p>
+            </div>
+            <div className="lp-compare-card lp-compare-good">
+              <div className="lp-compare-label">Our 9.09% threshold</div>
+              <div className="lp-compare-num">1,514.5</div>
+              <p className="lp-compare-sub">
+                Expected profit from the same Decision Tree, using a threshold derived from
+                E(Profit) = p·(−1.0) + (1−p)·(0.10) — <strong>2.2× more profit</strong> from the
+                same trained model, no extra data required.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* HOW IT WORKS */}
       <div id="how" className="glp-how-b">
@@ -487,7 +538,7 @@ export default function LandingPage() {
           <div className="lp-steps">
             {[
               { icon: '📋', title: 'Enter Applicant Data',  body: 'Fill in the loan application form with income, education status, loan amount, and other key financial signals.' },
-              { icon: '⚙️', title: 'Model Runs Analysis',   body: 'Our KNN-trained model processes the inputs against patterns learned from 200K+ real Home Credit applications.' },
+              { icon: '⚙️', title: 'Model Runs Analysis',   body: 'Our Decision Tree model processes the inputs against patterns learned from 307K+ real Home Credit applications, in about 13ms.' },
               { icon: '📊', title: 'Get a Risk Score',      body: 'Receive an instant and straightforward APPROVE or DENY decision based on the analysis.' },
             ].map((s) => (
               <div className="lp-step-card" key={s.title}>
@@ -504,12 +555,14 @@ export default function LandingPage() {
       <div id="mission" className="lp-mission-band">
         <div className="lp-mission-inner">
           <div>
-            <h2 className="lp-mission-title">Our Mission</h2>
+            <h2 className="lp-mission-title">What We Built</h2>
             <p className="lp-mission-body">
-              To minimize the cost of bad lending decisions — for lenders and
-              for borrowers. Traditional credit scoring leaves many creditworthy
-              people underserved and many risky loans approved. We built a
-              model that looks at the full picture.
+              We merged three real loan-history tables, used Random Forest importance to
+              narrow 122 engineered features down to 7 that an applicant can actually
+              self-report, then trained and compared a KNN, a Decision Tree, and a
+              Neural Network. For deployment, we chose the Decision Tree — it's over
+              99.9% faster to run than the Neural Network, with no heavy dependencies —
+              so this demo gives you a real, live decision, not a mockup.
             </p>
           </div>
           <div className="lp-pillars">
@@ -529,9 +582,10 @@ export default function LandingPage() {
       {/* FOOTER CTA */}
       <section className="lp-footer-cta">
         <div className="lp-footer-blob" />
-        <h2 className="lp-footer-cta-title">Ready to assess risk?</h2>
+        <h2 className="lp-footer-cta-title">Try the real model</h2>
         <p className="lp-footer-cta-sub">
-          Open the predictor and run your first application in under a minute.
+          Not a mockup — this form calls our live Decision Tree model and applies the
+          same 9.09% threshold shown above.
         </p>
         <button className="lp-btn-primary" onClick={() => navigate('/predict')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
