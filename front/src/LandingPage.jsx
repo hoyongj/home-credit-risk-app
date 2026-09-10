@@ -293,6 +293,24 @@ const styles = `
   .lp-pillar-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
   .lp-pillar-body { font-size: 13px; color: rgb(0, 0, 0); line-height: 1.6; }
 
+  /* TEAM */
+  .lp-team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .lp-team-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px; padding: 32px 20px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .lp-team-card:hover { border-color: rgba(99, 151, 255, 0.3); transform: translateY(-3px); }
+  .lp-team-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; letter-spacing: -0.5px;
+  }
+  .lp-team-name { font-size: 15px; font-weight: 700; color: var(--white); text-align: center; }
+
   /* FOOTER CTA */
   .lp-footer-cta {
     padding: 100px 60px; text-align: center;
@@ -332,6 +350,7 @@ const styles = `
     .lp-hero-inner { grid-template-columns: 1fr; gap: 48px; }
     .lp-stats { flex-wrap: wrap; gap: 24px; }
     .lp-steps { grid-template-columns: 1fr; }
+    .lp-team-grid { grid-template-columns: repeat(2, 1fr); }
     .lp-mission-inner { grid-template-columns: 1fr; gap: 40px; }
     .lp-section, .lp-mission-band, .lp-footer-cta { padding-left: 24px; padding-right: 24px; }
     .lp-footer { flex-direction: column; gap: 12px; text-align: center; }
@@ -429,12 +448,13 @@ export default function LandingPage() {
       <nav className="lp-nav">
         <Link to="/" className="lp-nav-logo">
           <div className="lp-nav-dot" />
-          CMPT 310: Group 10
+          Fraser Finance
         </Link>
         <ul className="lp-nav-links">
           <li><a href="#challenge">The Challenge</a></li>
           <li><a href="#how">How it works</a></li>
           <li><a href="#mission">What We Built</a></li>
+          <li><a href="#team">Our Team</a></li>
           <li>
             <button
               className="lp-btn-primary lp-nav-cta"
@@ -576,6 +596,22 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* TEAM */}
+      <div id="team" className="lp-section">
+        <p className="lp-section-eyebrow">Our Team</p>
+        <h2 className="lp-section-title">The people behind Fraser Finance</h2>
+        <div className="lp-team-grid">
+          {['Megan Chau', 'Samantha Gan', 'Hoyong Jung', 'Shameer Khan'].map((name) => (
+            <div className="lp-team-card" key={name}>
+              <div className="lp-team-avatar">
+                {name.split(' ').map((n) => n[0]).join('')}
+              </div>
+              <div className="lp-team-name">{name}</div>
+            </div>
+          ))}
         </div>
       </div>
 
